@@ -11,8 +11,8 @@ Authorization & context handling was inspired by Jeremy Chone [youtube course](h
 
 ## To configure correctly this places should be updated:
 
-- [] `.cargo/config.toml` -> databse url (localhost in example), pwd key & token key (replace `-` with `_` for RUST_LOG project name)
-- [] `Cargo.toml` -> project name
-- [] `docker-compose.yaml` -> at least db_name
-- [] `.env` -> db url for diesel
-- [] `DockerfileApp` -> `axum_diesel_async_graphql_template` should be replaced with project name (`-` replaced with `_`)
+- [ ] `.cargo/config.toml` -> databse url (localhost in example), pwd key & token key (replace `-` with `_` for RUST_LOG project name)
+- [ ] `Cargo.toml` -> project name
+- [ ] `docker-compose.yaml` -> at least db_name
+- [ ] `.env` -> db url for diesel
+- [ ] `DockerfileApp` -> `axum_diesel_async_graphql_template` should be replaced with project name (`-` replaced with `_`)
