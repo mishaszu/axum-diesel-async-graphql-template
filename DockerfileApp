@@ -1,0 +1,36 @@
+FROM rust:1.70 as build
+
+# create a new empty shell project
+RUN USER=root cargo new --bin axum_diesel_async_graphql_template
+WORKDIR /axum_diesel_async_graphql_template
+
+# copy over your manifests
+COPY ./Cargo.lock ./Cargo.lock
+COPY ./Cargo.toml ./Cargo.toml
+COPY ./diesel.toml ./diesel.toml
+
+# this build step will cache your dependencies
+RUN cargo build --release
+RUN rm src/*.rs
+
+# copy your source tree
+COPY ./src ./src
+COPY ./migrations ./migrations
+
+# build for release
+# RUN rm ./target/release/deps/wooboo_v3_be*
+RUN cargo build --release
+
+# our final base
+FROM debian:12
+
+# copy the build artifact from the build stage
+COPY --from=build /axum_diesel_async_graphql_template/target/release/axum_diesel_async_graphql_template .
+COPY --from=build /axum_diesel_async_graphql_template/target/release/axum_diesel_async_graphql_template ./migrations
+RUN apt-get update && apt-get install -y libpq-dev
+
+RUN mkdir -p test_factory_upload
+
+# set the startup command to run your binary
+CMD ["./axum_diesel_async_graphql_template"]
+

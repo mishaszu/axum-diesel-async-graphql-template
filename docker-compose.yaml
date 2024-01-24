@@ -1,0 +1,27 @@
+version: "3.3"
+services:
+  db1:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "dev_only_pwd"
+      POSTGRES_DB: "db_name"
+    volumes:
+      - database_data:/var/lib/postgresql/data
+  app:
+    build:
+      context: "."
+      dockerfile: "DockerfileApp"
+    ports:
+      - "8080:8080"
+    links:
+      - db1
+    environment:
+      - DATABASE_URL=postgres://postgres:dev_only_pwd@db1/db_name
+      - RUST_LOG=axum_diesel_async_graphql_template=debug
+
+volumes:
+  database_data:
+    driver: local

@@ -1,0 +1,59 @@
+[package]
+name = "axum-diesel-async-graphql-template"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# -- runtime
+tokio = { version = "1", features = ["full"] }
+tokio-stream = "0.1"
+# -- serialization
+serde = "1.0"
+serde_json = "1.0"
+serde_with = "3.4"
+# -- axum
+axum = { version = "0.7", features = ["multipart", "tracing"] }
+tower-cookies = "0.10"
+tower-http = { version = "0.5", features = ["fs"] }
+async-graphql = { version = "7.0", features = [
+    "chrono",
+    "uuid",
+    "apollo_tracing",
+    "tracing",
+] }
+# -- graphql
+async-graphql-axum = "7.0"
+# -- database orm
+diesel = { version = "2.1", features = ["postgres", "r2d2", "chrono", "uuid"] }
+diesel_migrations = "2.1"
+r2d2 = "0.8"
+# -- tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+# -- data encofing & hashing
+argon2 = "0.5"
+base64 = "0.21"
+data-encoding = "2"
+hmac = "0.12"
+jwt = "0.16"
+openssl = { version = "0.10", features = ["vendored"] }
+rand = "0.8"
+regex = "1.5"
+ring = "0.17"
+sha2 = "0.10"
+# -- env
+dotenv = "0.15"
+# -- time
+chrono = { version = "0.4", features = ["serde"] }
+chronoutil = "0.2.3"
+# -- uuid
+uuid = { version = "1", features = ["v4", "serde", "fast-rng"] }
+# -- byte file operations
+bytes = "1.5"
+# -- others
+async-trait = "0.1"
+derive_more = "0.99"
+lazy-regex = "3"
+strum_macros = "0.25"
